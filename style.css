@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Sancreek&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+
+    font-family: sans-serif;
+
+    background-image: url(./assets/img-fundo.png);
+    object-fit: fill;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    gap: 8px;
+
+    margin: 0 auto;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.logo{
+    width: 100%;
+    max-width: 750px;
+    align-self: center;
+
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{
+        transform: translateY(0);
+        transform: scale(1);
+    }
+    50%{
+        transform: translateY(-100px);
+        transform: scale(1.025);
+    }
+    100%{
+        transform: translateY(0);
+        transform: scale(1);
+    }
+}
+
+.select{
+    width: 100%;
+    max-width: 750px;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    align-self: center;
+    justify-content: center;
+}
+
+h1{
+    font-size: 38px;
+    color: #F6BB00;
+    margin-top: -30px;
+    margin-bottom: 0px;
+    font-family: "Chango", sans-serif;
+}
+
+
+h2{
+    font-size: 24px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: "Chango", sans-serif;
+    color: #F6BB00;
+}
+
+select{
+    width: 100%;
+    padding: 8px 16px 8px 16px;
+    background-color: rgb(238, 219, 194);
+    border-radius: 36px;
+
+    color: #4E2710;
+
+    font-family: "Chango", sans-serif;
+
+    align-content: center;
+    text-align: center;
+    font-size: 32px;
+
+}
+
+button{
+    width: 80%;
+    padding: 8px 16px 8px 16px;
+    background-color: #58a922;
+    border-radius: 36px;
+
+    align-self: center;
+
+    font-family: "Chango", sans-serif;
+    color: white;
+
+    border: 2px solid #F6BB00;
+
+    align-content: center;
+    font-size: 24px;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+button:hover{
+    scale: 1.05;
+    background-color: #F6BB00;
+    color: #4E2710;
+}
+
+.div_volta {
+    width: 25%;
+    background: #2b1d14;
+    border-radius: 12px;
+    overflow: hidden;
+    color: #f5e6c8;
+
+    padding: 16px;
+    
+    line-height: 1.4;
+
+    align-self: center;
+}
+
+.div_msg{
+    width: 90%;
+    height: 100%;
+
+    gap: 16px;
+
+    margin-bottom: 36px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-self: center;
+}
+
+.div_ranking{
+    width: 70%;
+    height: 100%;
+
+    margin-top: 48px;
+
+    gap: 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+}
+
+
+
+.classi {
+    width: 70%;
+    height: 100px;
+    background: #2b1d14;
+    border-radius: 36px;
+    overflow: hidden;
+    color: #f5e6c8;
+
+    padding: 24px;
+
+    gap: 16px;
+
+    display: flex;
+    flex-direction: row;
+
+    padding: 16px;
+    
+    line-height: 1.4;
+
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.medalhas{
+    width: 50px;
+    height: auto;
+}

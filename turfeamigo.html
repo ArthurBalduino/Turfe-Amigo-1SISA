@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./assets/logo-turfe-icon.png" type="image/x-icon">
+    <title>Turfe Amigo</title>
+</head>
+
+<body>
+    <main>
+        <div class="select" id="home">
+            <div id="logo">
+                <img class="logo" src="./assets/logo-turfe.png" alt="Logo Turfe Amigo">
+            </div>
+            <div class="select">
+                <h1>Selecione o seu cavalo:</h1>
+                <select name="cavalo" id="ipt_cavalo">
+                    <option disabled value="0"> Selecione um cavalo ------</option>
+                    <option value="1"> Cavalo 1</option>
+                    <option value="2"> Cavalo 2</option>
+                    <option value="3"> Cavalo 3</option>
+                    <option value="4"> Cavalo 4</option>
+                    <option value="5"> Cavalo 5</option>
+                </select>
+
+                <button onclick="comecar_corrida()"> CORRER!!!</button>
+            </div>
+        </div>
+
+        <div style="display: none;" class="div_ranking" id="div_ranking">
+            <h1> RANKING:</h1>
+        </div>
+
+        <div style="display: none;" class="div_msg" id="div_msg">
+        </div>
+
+    </main>
+</body>
+
+</html>
+
+<script>
+    // cria JSON
+
+    let cavalo = {
+        vet_id: [],
+        vet_tempo_total: [],
+        vet_volta_atual: [],
+        vet_ultima_volta: []
+    }
+
+    let n_voltas = 7 // n_voltas
+
+    function cadastrar_cavalos() { // cadastra o número de cavalos
+
+        for (let i = 1; i <= 5; i++) {
+            cavalo.vet_id.push(i);
+
+        }
+    }
+
+    function comecar_corrida() {
+
+        document.getElementById("home").style.display = "none";
+        document.getElementById("div_msg").style.display = "flex";
+        document.getElementById("div_ranking").style.display = "flex";
+
+
+        let cavalo_escolhido = Number(ipt_cavalo.value);
+
+        cadastrar_cavalos();
+
+
+        for (let i_voltas = 1; i_voltas <= n_voltas; i_voltas++) {
+
+            // resetar texto da volta atual
+            let ax_texto = '';
+
+            for (let i_cavalo = 0; i_cavalo < cavalo.vet_id.length; i_cavalo++) {
+
+                let tempo_aleatorio = Number((Math.random() * 2 + 7).toFixed(1));
+
+                if (i_voltas == 1) { // primeira volta
+
+                    cavalo.vet_tempo_total.push(tempo_aleatorio);
+                    cavalo.vet_volta_atual.push(tempo_aleatorio);
+
+                } else if (i_voltas == n_voltas) { // última volta
+
+                    cavalo.vet_tempo_total[i_cavalo] += tempo_aleatorio;
+
+                    // salva a última volta
+                    cavalo.vet_ultima_volta[i_cavalo] = tempo_aleatorio;
+
+                    cavalo.vet_volta_atual[i_cavalo] = tempo_aleatorio;
+
+                } else { // padrão
+
+                    cavalo.vet_tempo_total[i_cavalo] += tempo_aleatorio;
+                    cavalo.vet_volta_atual[i_cavalo] = tempo_aleatorio;
+                }
+            }
+
+            let txt_volta = `<h2>Volta ${i_voltas}</h2> <hr>`;
+
+            for (let i = 0; i < cavalo.vet_id.length; i++) {
+
+                ax_texto += `
+                <b>Cavalo ${i + 1}</b>
+                | Volta: ${cavalo.vet_volta_atual[i].toFixed(1)}
+                | Tempo total: ${cavalo.vet_tempo_total[i].toFixed(1)}
+                <br>`;
+            }
+
+            div_msg.innerHTML += `
+            <div class="div_volta">
+                ${txt_volta}
+                ${ax_texto}
+            </div>`;
+        }
+
+        definirRanking();
+    }
+
+    let ordem_chegada = [];
+
+    function definirRanking() {
+
+        ordem_chegada = [];
+
+        // copia os ids
+        for (let i = 0; i < cavalo.vet_id.length; i++) {
+            ordem_chegada.push(cavalo.vet_id[i]);
+        }
+
+        // ordena pelo menor tempo
+        for (let i = 0; i < ordem_chegada.length; i++) {
+
+            for (let j = i + 1; j < ordem_chegada.length; j++) {
+
+                let id_atual = ordem_chegada[i] - 1;
+                let id_comparado = ordem_chegada[j] - 1;
+
+                if (cavalo.vet_tempo_total[id_comparado] < cavalo.vet_tempo_total[id_atual]) {
+
+                    let aux = ordem_chegada[i];
+                    ordem_chegada[i] = ordem_chegada[j];
+                    ordem_chegada[j] = aux;
+                }
+            }
+        }
+
+        let primeiro = ordem_chegada[0];
+        let segundo = ordem_chegada[1];
+        let terceiro = ordem_chegada[2];
+
+
+        div_ranking.innerHTML += `
+        <div class="classi">
+            <img class="medalhas" src="./assets/primeiro-lugar.png" alt="primeiro-lugar"> <h2>Cavalo ${primeiro}</h2>
+            <img class="medalhas" src="./assets/segundo-lugar.png" alt="segundo-lugar"> <h2>Cavalo ${segundo}</h2>
+            <img class="medalhas" src="./assets/terceiro-lugar.png" alt="terceiro-lugar"> <h2>Cavalo ${terceiro}</h2>
+        </div>
+    `;
+    }
+
+
+
+</script>
